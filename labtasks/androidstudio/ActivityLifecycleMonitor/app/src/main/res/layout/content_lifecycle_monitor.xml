@@ -48,7 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/remember_me_checkbox_content"
-        android:saveEnabled="false" />
+        android:saveEnabled="true" />
 
     <LinearLayout
         android:layout_width="wrap_content"

@@ -69,7 +69,95 @@ public class LifecycleMonitorActivity extends Activity {
         Button cancelButton = (Button)findViewById(R.id.cancel_button);
         cancelButton.setOnClickListener(buttonClickListener);
 
-        Log.d(Constants.TAG, "onCreate() method was invoked");
+        if (savedInstanceState == null) {
+            Log.d(Constants.TAG, "onCreate() method was invoked without a previous state");
+        } else {
+            Log.d(Constants.TAG, "onCreate() method was invoked with a previous state");
+			if (savedInstanceState.containsKey(Constants.USERNAME_EDIT_TEXT)) {
+				EditText usernameEditText = (EditText)findViewById(R.id.username_edit_text);
+				usernameEditText.setText(savedInstanceState.getString(Constants.USERNAME_EDIT_TEXT));
+			}
+			if (savedInstanceState.containsKey(Constants.PASSWORD_EDIT_TEXT)) {
+				EditText passwordEditText = (EditText)findViewById(R.id.password_edit_text);
+				passwordEditText.setText(savedInstanceState.getString(Constants.PASSWORD_EDIT_TEXT));
+			}
+			if (savedInstanceState.containsKey(Constants.REMEMBER_ME_CHECKBOX)) {
+				CheckBox rememberMeCheckBox = (CheckBox)findViewById(R.id.remember_me_checkbox);
+				rememberMeCheckBox.setChecked(savedInstanceState.getBoolean(Constants.REMEMBER_ME_CHECKBOX));
+			}
+        }
+    }
+
+    @Override
+    protected void onRestart(){
+        super.onRestart();
+        Log.d(Constants.TAG, "onRestart method was invoked");
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d(Constants.TAG, "onStart() method was invoked");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(Constants.TAG, "onResume() method was invoked");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d(Constants.TAG, "onPause() method was invoked");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d(Constants.TAG, "onStop() method was invoked");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(Constants.TAG, "onDestroy() method was invoked");
+    }
+    @Override
+    protected void onSaveInstanceState(Bundle savedInstanceState){
+        super.onSaveInstanceState(savedInstanceState);
+        Log.d(Constants.TAG, "onSaveInstanceState() method was invoked");
+        EditText username = (EditText)findViewById(R.id.username_edit_text);
+        EditText password = (EditText)findViewById(R.id.password_edit_text);
+        CheckBox checkbox = (CheckBox)findViewById(R.id.remember_me_checkbox);
+        if(checkbox.isChecked()){
+            savedInstanceState.putString(Constants.USERNAME_EDIT_TEXT,username.getText().toString() );
+            savedInstanceState.putString(Constants.PASSWORD_EDIT_TEXT,password.getText().toString() );
+            savedInstanceState.putBoolean(Constants.REMEMBER_ME_CHECKBOX, checkbox.isChecked());
+
+        }
+
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        Log.d(Constants.TAG, "onRestoreInstanceState() method was invoked");
+
+        if (savedInstanceState.containsKey(Constants.USERNAME_EDIT_TEXT)) {
+            EditText usernameEditText = (EditText)findViewById(R.id.username_edit_text);
+            usernameEditText.setText(savedInstanceState.getString(Constants.USERNAME_EDIT_TEXT));
+        }
+        if (savedInstanceState.containsKey(Constants.PASSWORD_EDIT_TEXT)) {
+            EditText passwordEditText = (EditText)findViewById(R.id.password_edit_text);
+            passwordEditText.setText(savedInstanceState.getString(Constants.PASSWORD_EDIT_TEXT));
+        }
+        if (savedInstanceState.containsKey(Constants.REMEMBER_ME_CHECKBOX)) {
+            CheckBox rememberMeCheckBox = (CheckBox)findViewById(R.id.remember_me_checkbox);
+            rememberMeCheckBox.setChecked(savedInstanceState.getBoolean(Constants.REMEMBER_ME_CHECKBOX));
+        }
+
+
+
     }
 
     @Override
